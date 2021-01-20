@@ -5760,6 +5760,12 @@ static void async_series_re(uv_async_t * handle)
         series = (siridb_series_t *)
                 q_wrapper->vec->data[q_wrapper->vec_index];
 
+        if (series->name_len > 150) {
+            // corruption, terminate here
+            exit(1);
+            continue;
+        }
+
         pcre_exec_ret = pcre2_match(
                 q_wrapper->regex,
                 (PCRE2_SPTR8) series->name,
