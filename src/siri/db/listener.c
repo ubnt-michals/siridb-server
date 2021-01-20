@@ -5762,7 +5762,7 @@ static void async_series_re(uv_async_t * handle)
 
         if (series->name_len > 150) {
             // corruption, terminate here
-            exit(1);
+            abort();
             continue;
         }
 
